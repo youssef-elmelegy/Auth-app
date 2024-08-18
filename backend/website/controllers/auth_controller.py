@@ -171,16 +171,20 @@ def login():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
+    print(data)
     
     try:
         user = User.query.filter_by(email=email).first()
+        print(user)
         if not user:
             return jsonify({"success": False, "message": "User not found"}), 404
         
         if not check_password_hash(user.password, password):
+            print("pass")
             return jsonify({"success": False, "message": "Invalid credentials"}), 401
         
         user.lastLogin = datetime.utcnow()
+        print("commit")
         db.session.commit()
         
         
@@ -197,6 +201,7 @@ def login():
                 "updated_at": user.updated_at
             }
         }))
+        print("cookie")
         generate_token_and_set_cookie(response, user.id)
 
         return response
