@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = "https://auth-app-api-one.vercel.app/";
+const API_URL = "https://auth-app-api-one.vercel.app";
 
 axios.defaults.withCredentials = true;
 
